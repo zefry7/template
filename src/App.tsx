@@ -1,23 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Footer } from './components/Footer/Footer';
+import { Header } from './components/Header/Header';
+import { Main } from './components/Main/Main';
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <p>
-//           Edit <code>src/App.tsx</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
+function App() {
+   const [infoTrack, setInfoTrack] = useState<string>('');
+   const [coverTrack, setCoverTrack] = useState<string>("https://www.last.fm/static/images/defaults/player_default_album.430223706b14.png");
 
-// export default App;
+   const choosingInfoTrack = (str: string, cover: string) =>{
+      setInfoTrack(str);
+      setCoverTrack(cover);
+   }
+
+   return (
+    <div id="root">
+      <Header infoTrack={infoTrack} coverTrack={coverTrack}/>
+
+      <Main choosingInfoTrack={choosingInfoTrack}/>
+
+      <Footer />
+    </div> 
+   );
+}
+
+export default App;
