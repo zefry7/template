@@ -13,13 +13,11 @@ function App() {
    }
 
    return (
-    <div id="root">
-      <Header infoTrack={infoTrack} coverTrack={coverTrack}/>
-
-      <Main choosingInfoTrack={choosingInfoTrack}/>
-
+      <>
+      <Header infoTrack={infoTrack} coverTrack={coverTrack} />
+      <Main choosingInfoTrack={choosingInfoTrack} />
       <Footer />
-    </div> 
+      </>
    );
 }
 
