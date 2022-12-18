@@ -237,7 +237,6 @@ export const PopularArtist = (props: IPopularArtist) => {
                     </ul>
                   </div>
                 </li>
-
         </ol>
     );
 }

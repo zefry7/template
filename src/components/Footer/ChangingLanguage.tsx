@@ -1,68 +1,53 @@
+import { useEffect, useState } from "react";
+
 export const ChangingLanguage = () => {
+    const listLanguage = ["English", "Deutsch", "Español", "Français", "Italiano", "日本語", "Polski", "Português", "Русский", "Svenska", "Türkçe", "简体中文"]
+    const defaultStyle: (string)[] = [ 'footer-language hover-text',
+                              'footer-language hover-text',
+                              'footer-language hover-text',
+                              'footer-language hover-text',
+                              'footer-language hover-text',
+                              'footer-language hover-text',
+                              'footer-language hover-text',
+                              'footer-language hover-text',
+                              'footer-language hover-text',
+                              'footer-language hover-text',
+                              'footer-language hover-text',
+                              'footer-language hover-text',
+                              'footer-language hover-text',
+                              'footer-language hover-text'];
 
-
+    const [arr, setValue] = useState([
+    'footer-language hover-text footer-language--active',
+    'footer-language hover-text',
+    'footer-language hover-text',
+    'footer-language hover-text',
+    'footer-language hover-text',
+    'footer-language hover-text',
+    'footer-language hover-text',
+    'footer-language hover-text',
+    'footer-language hover-text',
+    'footer-language hover-text',
+    'footer-language hover-text',
+    'footer-language hover-text',
+    'footer-language hover-text',
+    'footer-language hover-text']);
+    
     /**Выбор языка на странице */
-    const onClick = (event: any) => {
-        const a = event.target.parentElement.parentElement.getElementsByTagName('strong');
-        for(let j = 0; j < a.length; ++j){
-            a[j].parentElement.setAttribute('class', 'footer-language');
-            a[j].setAttribute('class', 'hover-text');
-        }
-
-        event.target.parentElement.setAttribute('class', event.target.parentElement.getAttribute('class') + ' footer-language--active');
-        event.target.setAttribute('class', '');
+    const onClick: React.MouseEventHandler<HTMLElement> = (event) => {
+      const n = event.currentTarget.title;
+    
+      setValue([...defaultStyle.slice(0, Number(n)), 'footer-language footer-language--active',...defaultStyle.slice(Number(n) + 1)])
     }
 
     return (
-      <ul className="language-selector">
-        <li className="footer-language footer-language--active">
-          <strong onClick={onClick}>English</strong>
-        </li>
-
-        <li className="footer-language">
-          <strong className="hover-text" onClick={onClick}>Deutsch</strong>
-        </li>
-
-        <li className="footer-language">
-          <strong className="hover-text" onClick={onClick}>Español</strong>
-        </li>
-
-        <li className="footer-language">
-          <strong className="hover-text" onClick={onClick}>Français</strong>
-        </li>
-
-        <li className="footer-language">
-          <strong className="hover-text" onClick={onClick}>Italiano</strong>
-        </li>
-
-        <li className="footer-language">
-          <strong className="hover-text" onClick={onClick}>日本語</strong>
-        </li>
-
-        <li className="footer-language">
-          <strong className="hover-text" onClick={onClick}>Polski</strong>
-        </li>
-
-        <li className="footer-language">
-          <strong className="hover-text" onClick={onClick}>Português</strong>
-        </li>
-
-        <li className="footer-language">
-          <strong className="hover-text" onClick={onClick}>Русский</strong>
-        </li>
-
-        <li className="footer-language">
-          <strong className="hover-text" onClick={onClick}>Svenska</strong>
-        </li>
-
-        <li className="footer-language">
-          <strong className="hover-text" onClick={onClick}>Türkçe</strong>
-        </li>
-
-        <li className="footer-language">
-          <strong className="hover-text" onClick={onClick}>简体中文</strong>
-        </li>
-
+      <ul className="language-selector">  
+        {arr.map((l, index) => (
+          <li className={l} title={index.toString()} onClick={onClick}>
+            <strong>{listLanguage[index]}</strong>
+          </li>          
+        ))}
       </ul>
     );
 }
+

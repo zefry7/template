@@ -1,3 +1,4 @@
+import React, { EventHandler, MouseEventHandler } from "react";
 
 interface IPopularTrack {
     pageArtist: (str: string) => void;
@@ -20,7 +21,7 @@ export const PopularTrack = (props: IPopularTrack) => {
         pageTag(event.target.innerHTML)
     }
 
-    const clickTrack = (event: any) => {
+    const clickTrack = (event: any) => { 
         pageTrack(event.target.innerHTML)
     }
 

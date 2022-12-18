@@ -16,20 +16,20 @@ export const CreateSearchBar = (props: ICreateSearchBar) =>{
         toggleSearchBar(false);
     }
 
+    const funcOpenPage = (form: FormData) => {
+        openPage(form.get('textSearch')+ '');
+    }
+
     /**Поиск по нажатию на кнопку */
     const clickSubmit = (event: any) =>{
         event.preventDefault();
-        var form = new FormData(event.target.parentNode.parentNode);
-        
-        openPage(form.get('textSearch')+ '');
+        funcOpenPage(new FormData(event.target.parentNode.parentNode));     
     }
 
     /**Поиск по нажатию на "Enter" */
     const onSubmit = (event: any) => {
         event.preventDefault();
-        var form = new FormData(event.target);
-
-        openPage(form.get('textSearch')+ '')
+        funcOpenPage(new FormData(event.target));      
     }
 
     if(actionSearchBar){
