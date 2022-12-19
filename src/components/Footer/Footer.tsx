@@ -100,7 +100,9 @@ export const Footer = () =>{
             <div className="row">
   
               <div className="col-xs-12 col-sm-9">
-                <ChangingLanguage />
+                <ul className="language-selector">  
+                    <ChangingLanguage />
+                </ul>
   
                 <p className="footer-timezone">
                   <a className="link" href="https://www.last.fm/settings/website#website">

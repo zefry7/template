@@ -1,53 +1,30 @@
 import { useEffect, useState } from "react";
 
 export const ChangingLanguage = () => {
-    const listLanguage = ["English", "Deutsch", "Español", "Français", "Italiano", "日本語", "Polski", "Português", "Русский", "Svenska", "Türkçe", "简体中文"]
-    const defaultStyle: (string)[] = [ 'footer-language hover-text',
-                              'footer-language hover-text',
-                              'footer-language hover-text',
-                              'footer-language hover-text',
-                              'footer-language hover-text',
-                              'footer-language hover-text',
-                              'footer-language hover-text',
-                              'footer-language hover-text',
-                              'footer-language hover-text',
-                              'footer-language hover-text',
-                              'footer-language hover-text',
-                              'footer-language hover-text',
-                              'footer-language hover-text',
-                              'footer-language hover-text'];
+    const [lang, setLang] = useState<number>(0);
 
-    const [arr, setValue] = useState([
-    'footer-language hover-text footer-language--active',
-    'footer-language hover-text',
-    'footer-language hover-text',
-    'footer-language hover-text',
-    'footer-language hover-text',
-    'footer-language hover-text',
-    'footer-language hover-text',
-    'footer-language hover-text',
-    'footer-language hover-text',
-    'footer-language hover-text',
-    'footer-language hover-text',
-    'footer-language hover-text',
-    'footer-language hover-text',
-    'footer-language hover-text']);
+    const listLanguage = ["English", "Deutsch", "Español", "Français", "Italiano", "日本語", "Polski", "Português", "Русский", "Svenska", "Türkçe", "简体中文"]
     
     /**Выбор языка на странице */
     const onClick: React.MouseEventHandler<HTMLElement> = (event) => {
-      const n = event.currentTarget.title;
-    
-      setValue([...defaultStyle.slice(0, Number(n)), 'footer-language footer-language--active',...defaultStyle.slice(Number(n) + 1)])
+      setLang(Number(event.currentTarget.title));
     }
 
-    return (
-      <ul className="language-selector">  
-        {arr.map((l, index) => (
-          <li className={l} title={index.toString()} onClick={onClick}>
-            <strong>{listLanguage[index]}</strong>
+    const changingStyle = (index: number) => {
+      if(lang == index){
+        return 'footer-language footer-language--active';
+      }
+      return 'footer-language hover-text';
+    }
+
+    return ( 
+      <>
+        {listLanguage.map((l, index) => (
+          <li className={changingStyle(index)} title={index.toString()} onClick={onClick}>
+            <strong>{l}</strong>
           </li>          
         ))}
-      </ul>
+      </>
     );
 }
 

@@ -1,7 +1,6 @@
-import { abortCont, getResponses } from "../../api";
+import { getResponses } from "../../api";
 import { PopularArtist } from "./PopularArtist";
 import { PopularTrack } from "./PopularTrack";
-import { useState } from 'react';
 
 
 interface IMain {
@@ -9,20 +8,11 @@ interface IMain {
 }
 
 export const Main = (props: IMain) => {
-    const [resp, setResp] = useState<string>('');
-
     const {choosingInfoTrack} = props;
 
 
     /**Переход на страницу исполнителя */
     const pageArtist = (str:string) => {
-
-      if(resp != ''){
-        abortCont();
-      }
-
-      setResp(str);
-
       const data = getResponses('?method=artist.getinfo&artist=' + str);
 
       data.then(results => window.location.href = results.artist.url);
