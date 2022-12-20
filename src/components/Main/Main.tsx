@@ -1,21 +1,55 @@
-import { getResponses } from "../../api";
+import { useEffect, useState } from "react";
 import { PopularArtist } from "./PopularArtist";
 import { PopularTrack } from "./PopularTrack";
 
+const apiKey = 'a3600493f930704cc99f0653e363a8bb';
+const startHttp = 'http://ws.audioscrobbler.com/2.0/';
 
 interface IMain {
   choosingInfoTrack: (str: string, cover: string) => void;
 }
 
+
 export const Main = (props: IMain) => {
     const {choosingInfoTrack} = props;
+    const [str, setStr] = useState<string>('');
+    const [res, setRes] = useState<boolean>();
 
+    useEffect(() => {
+      const controller = new AbortController()
+      const { signal } = controller;
+
+      (async () => {
+        const a = await fetch(startHttp + str + '&api_key='+ apiKey + '&format=json', 
+        { signal })
+        .then((result) => {
+          console.log('in then');
+          
+          if(result.ok === false){
+            throw new Error('Error: ' +  a.status);
+          }
+          if(res === false) {
+            result.json().then((results) => window.location.href = results.artist.url);
+          }else{
+            result.json().then(results => window.location.href = results.results.trackmatches.track[0].url);
+          }
+
+          return result
+        })
+        .catch((err) => {
+          console.log(err.name);
+          return err;
+        })
+
+      })()
+  
+      return () => controller.abort()
+    }, [str])
 
     /**Переход на страницу исполнителя */
     const pageArtist = (str:string) => {
-      const data = getResponses('?method=artist.getinfo&artist=' + str);
-
-      data.then(results => window.location.href = results.artist.url);
+      setRes(false);
+      setStr('?method=artist.getinfo&artist=' + str) 
     }
 
     /**Переход на страницу тега */
@@ -25,9 +59,8 @@ export const Main = (props: IMain) => {
 
     /**Переход на страницу трека */
     const pageTrack = (str:string) => {
-      const data = getResponses('?method=track.search&track=' + str);
-
-      data.then(results => window.location.href = results.results.trackmatches.track[0].url);
+      setRes(true);
+      setStr('?method=track.search&track=' + str)
     }
 
     return(
@@ -53,4 +86,8 @@ export const Main = (props: IMain) => {
     </main>
 
     );
+}
+
+function useEffectAsync(arg0: () => () => void, arg1: string[]) {
+  throw new Error("Function not implemented.");
 }

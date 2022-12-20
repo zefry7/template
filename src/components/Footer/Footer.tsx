@@ -1,96 +1,42 @@
 import { ChangingLanguage } from "./ChangingLanguage";
 
 export const Footer = () =>{
+    const nameColList = ["Company", "Help", "Goodies", "Account", "Follow Us"]
+    const nameRowList = ["About Last.fm", 'Contact Us', 'Jobs', '',
+                         "Track My Music", "Community Support", 'Community Guidelines', 'Help',
+                         "Download Scrobbler", "Developer API", "Free Music Downloads", "Merchandise",
+                         "Sign Up", "Log In", "Subscribe", "",
+                         "Facebook", "Twitter", "Instagram", "YouTube"]
+    const linkRowList = ["https://www.last.fm/about", "https://www.last.fm/about/contact", "https://www.last.fm/about/jobs", '',
+                         "https://www.last.fm/about/trackmymusic", "https://support.last.fm/", "https://www.last.fm/help/guidelines", "https://www.last.fm/help/faq",
+                         "https://www.last.fm/about/trackmymusic", "https://www.last.fm/api", "https://www.last.fm/music/+free-music-downloads", "https://store.last.fm/",
+                         "https://www.last.fm/join", "https://www.last.fm/login", "https://www.last.fm/pro", "",
+                         "https://www.facebook.com/lastfm", "https://twitter.com/lastfm", "https://www.instagram.com/last_fm", "https://www.youtube.com/user/lastfm"]
+
     return(
         <footer className="footer">
         <div className="footer-top">
           <div className="footer-container">
             <div className="footer-top-row">
-  
-              <div className="footer-top-col">
-                <h2 className="footer-heading">Company</h2>
-                <ul className="footer-links">
-                  <li>
-                    <a className="hover-text link" href="https://www.last.fm/about">About Last.fm</a>
-                  </li>
-                  <li>
-                    <a className="hover-text link" href="https://www.last.fm/about/contact">Contact Us</a>
-                  </li>
-                  <li>
-                    <a className="hover-text link" href="https://www.last.fm/about/jobs">Jobs</a>
-                  </li>
-                </ul>
-              </div> 
-  
-              <div className="footer-top-col">
-                <h2 className="footer-heading">Help</h2>
-                <ul className="footer-links">
-                  <li>
-                    <a className="hover-text link" href="https://www.last.fm/about/trackmymusic">Track My Music</a>
-                  </li>
-                  <li>
-                    <a className="hover-text link" href="https://support.last.fm/">Community Support</a>
-                  </li>
-                  <li>
-                    <a className="hover-text link" href="https://www.last.fm/help/guidelines">Community Guidelines</a>
-                  </li>
-                  <li>
-                    <a className="hover-text link" href="https://www.last.fm/help/faq">Help</a>
-                  </li>
-                </ul>
-              </div> 
-  
-              <div className="footer-top-col">
-                <h2 className="footer-heading">Goodies</h2>
-                <ul className="footer-links">
-                  <li>
-                    <a className="hover-text link" href="https://www.last.fm/about/trackmymusic">Download Scrobbler</a>
-                  </li>
-                  <li>
-                    <a className="hover-text link" href="https://www.last.fm/api">Developer API</a>
-                  </li>
-                  <li>
-                    <a className="hover-text link" href="https://www.last.fm/music/+free-music-downloads">Free Music Downloads</a>
-                  </li>
-                  <li>
-                    <a className="hover-text link" href="https://store.last.fm/">Merchandise</a>
-                  </li>
-                </ul>
-              </div> 
-  
-              <div className="footer-top-col">
-                <h2 className="footer-heading">Account</h2>
-                <ul className="footer-links">
-                  <li>
-                    <a className="hover-text link" href="https://www.last.fm/join">Sign Up</a>
-                  </li>
-                  <li>
-                    <a className="hover-text link" href="https://www.last.fm/login">Log In</a>
-                  </li>
-                  <li>
-                    <a className="hover-text link" href="https://www.last.fm/pro">Subscribe</a>
-                  </li>
-                </ul>
-              </div> 
-  
-              <div className="footer-top-col">
-                <h2 className="footer-heading">Follow Us</h2>
-                <ul className="footer-links">
-                  <li>
-                    <a className="hover-text link" href="https://www.facebook.com/lastfm">Facebook</a>
-                  </li>
-                  <li>
-                    <a className="hover-text link" href="https://twitter.com/lastfm">Twitter</a>
-                  </li>
-                  <li>
-                    <a className="hover-text link" href="https://www.instagram.com/last_fm">Instagram</a>
-                  </li>
-                  <li>
-                    <a className="hover-text link" href="https://www.youtube.com/user/lastfm">YouTube</a>
-                  </li>
-                </ul>
-              </div> 
-  
+                {nameColList.map((el,index) => (
+                  <div className="footer-top-col">
+                  <h2 className="footer-heading">{el}</h2>
+                  <ul className="footer-links">
+                    <li>
+                      <a className="hover-text link" href={linkRowList[4 * index]}>{nameRowList[4 * index]}</a>
+                    </li>
+                    <li>
+                      <a className="hover-text link" href={linkRowList[4 * index + 1]}>{nameRowList[4 * index + 1]}</a>
+                    </li>
+                    <li>
+                      <a className="hover-text link" href={linkRowList[4 * index + 2]}>{nameRowList[4 * index + 2]}</a>
+                    </li>
+                    <li>
+                      <a className="hover-text link" href={linkRowList[4 * index + 2]}>{nameRowList[4 * index + 3]}</a>
+                    </li>
+                  </ul>
+                  </div> 
+                ))} 
             </div>
           </div>
         </div>
