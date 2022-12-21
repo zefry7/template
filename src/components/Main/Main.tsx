@@ -13,7 +13,7 @@ interface IMain {
 export const Main = (props: IMain) => {
     const {choosingInfoTrack} = props;
     const [str, setStr] = useState<string>('');
-    const [res, setRes] = useState<boolean>();
+    const [requestType, setRequestType] = useState<number>(-1);
 
     useEffect(() => {
       const controller = new AbortController()
@@ -28,10 +28,17 @@ export const Main = (props: IMain) => {
           if(result.ok === false){
             throw new Error('Error: ' +  a.status);
           }
-          if(res === false) {
+
+          /**При нажатие на определённый элемент у нас будет меняться тип запроса. 
+           * Если мы нажимаем на артиста, то значение requestType = 0,
+           * а если мы нажимаем на трек, то значение requestType = 1.
+          */
+          if(requestType == 0) {
             result.json().then((results) => window.location.href = results.artist.url);
-          }else{
+            setRequestType(-1);
+          }else if(requestType == 1){
             result.json().then(results => window.location.href = results.results.trackmatches.track[0].url);
+            setRequestType(-1);
           }
 
           return result
@@ -48,7 +55,8 @@ export const Main = (props: IMain) => {
 
     /**Переход на страницу исполнителя */
     const pageArtist = (str:string) => {
-      setRes(false);
+      /**Изменение типа запроса */
+      setRequestType(0);
       setStr('?method=artist.getinfo&artist=' + str) 
     }
 
@@ -59,7 +67,8 @@ export const Main = (props: IMain) => {
 
     /**Переход на страницу трека */
     const pageTrack = (str:string) => {
-      setRes(true);
+      /**Изменение типа запроса */
+      setRequestType(1);
       setStr('?method=track.search&track=' + str)
     }
 
